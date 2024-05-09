@@ -12,5 +12,6 @@ namespace BookStoreApi.StaticClasses
         public static IMongoCollection<ProjectModel> projectCollection = database.GetCollection<ProjectModel>("Projects");
         public static IMongoCollection<Book> bookCollection = database.GetCollection<Book>("Libros");
         public static IMongoCollection<CodeModel> codeCollection = database.GetCollection<CodeModel>("Codes");
+        public static IMongoCollection<UserM> userCollection = database.GetCollection<UserM>("Users");
     }
 }

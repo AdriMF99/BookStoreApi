@@ -1,5 +1,6 @@
 ﻿using BookStoreApi.Models;
 using BookStoreApi.Services;
+using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,6 +72,15 @@ namespace BookStoreApi.Controllers
             await _bookService.RemoveAsync(id);
 
             return NoContent();
+        }
+
+        [Route("login")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest userLogin)
+        {
+            ErrorOr<dynamic> loginResponse = await _bookService.Login(userLogin.UserName, userLogin.Password);
+            return Ok(loginResponse);
         }
     }
 }

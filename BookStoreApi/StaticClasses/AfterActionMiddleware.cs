@@ -66,18 +66,10 @@ namespace BookStoreApi.StaticClasses
 
             var content = new StringContent(projectDataJson);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            try
-            {
-                var response2 = await _httpClient.PostAsync(apiUrl2, content);
-            }
-            catch (Exception ex)
-            {
-
-            }
             
             // Envía la solicitud HTTP al endpoint
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+            var response2 = await _httpClient.PostAsync(apiUrl2, content);
             //HttpResponseMessage response2 = await _httpClient.GetAsync(apiUrl2);
             if (response2.IsSuccessStatusCode)
             {
