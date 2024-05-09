@@ -12,7 +12,11 @@ namespace BookStoreApi.Models
         [BsonElement("Name")]
         [JsonPropertyName("Name")]
         public string BookName { get; set; } = null!;
+        [BsonElement("TotalPrice")]
+        [JsonPropertyName("TotalPrice")]
         public decimal Price { get; set; }
+        [BsonElement("Worlds")]
+        [JsonPropertyName("Worlds")]
         public string Category { get; set; } = null!;
         public string Author { get; set; } = null!;
     }

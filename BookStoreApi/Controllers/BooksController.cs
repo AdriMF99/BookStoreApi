@@ -1,5 +1,6 @@
 ﻿using BookStoreApi.Models;
 using BookStoreApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreApi.Controllers
@@ -13,25 +14,28 @@ namespace BookStoreApi.Controllers
         public BooksController(BooksService bookService) =>
             _bookService = bookService;
 
+        //[Authorize(Policy = "ElevatedRights")]
+        [Route("all-books")]
         [HttpGet]
         public async Task<List<Book>> Get() =>
              await _bookService.GetAsync();
-
-        [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Book>> Get(string id)
+        
+        [HttpGet("{author:length(1,10)}")]
+        public async Task<ActionResult<Book>> Get(string author)
         {
-            var book = await _bookService.GetAsync(id);
+            var book = await _bookService.GetAsync(author);
 
             if (book == null)
             {
                 return NotFound();
             } else
             {
-                Console.WriteLine("Adrian");
+                Console.WriteLine(DateTime.Now);
                 return book;
             }
         }
 
+        [Route("create-book")]
         [HttpPost]
         public async Task<IActionResult> Post(Book newBook)
         {
